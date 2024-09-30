@@ -25,8 +25,8 @@ type PageResult struct {
 }
 
 type PageInfo struct {
-	Page int64 `json:"page" form:"page" query:"page"`
-	Size int64 `json:"size" form:"size" query:"size"`
+	PageIndex int64 `json:"page_index" form:"page_index" query:"page_index"`
+	PageSize  int64 `json:"page_size" form:"page_size" query:"page_size"`
 }
 
 func Error(ctx *gin.Context, err error) {
