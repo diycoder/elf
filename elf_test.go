@@ -21,11 +21,11 @@ func TestPlugin(t *testing.T) {
 func initPlugin() error {
 	// apollo config init
 	if err := apollo.NewOptions(
-		apollo.WithAddress("http://apollo.diycoder.com:8080"), // apollo 地址
-		apollo.WithNamespace("application"),                   // apollo namespace
-		apollo.WithAppID("user-api"),                          // apollo appID
-		apollo.WithCluster("dev"),                             // apollo cluster
-		apollo.WithBackUp(true),                               // 是否备份
+		apollo.WithAddress("127.0.0.1:8080"), // apollo 地址
+		apollo.WithNamespace("application"),  // apollo namespace
+		apollo.WithAppID("user-api"),         // apollo appID
+		apollo.WithCluster("dev"),            // apollo cluster
+		apollo.WithBackUp(true),              // 是否备份
 	).Store(); err != nil {
 		return err
 	}

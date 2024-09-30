@@ -1,12 +1,4 @@
 
-# 代码规范检查
-.PHONY: lint
-lint:
-	@docker run --rm  \
-	  --env PROJECT_TYPE="make-lint" \
-	  -v $(shell pwd):/opt/app -w /opt/app \
-	  registry.cn-hangzhou.aliyuncs.com/mudu/all-in-one:v1.0.0
-
 
 # 单元测试
 .PHONY: test

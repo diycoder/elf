@@ -24,9 +24,10 @@ type dbconfig struct {
 	Host            string `json:"host"`
 	Port            string `json:"port"`
 	DBName          string `json:"db_name"`
-	MaxOpenConns    int    `json:"max_open_conns"`
-	MaxIdleConns    int    `json:"max_idle_conns"`
-	ConnMaxLifetime int    `json:"conn_max_lifetime"`
+	MaxOpenConn     int    `json:"max_open_conn"`
+	MaxIdleConn     int    `json:"max_idle_conn"`
+	ConnMaxLifetime int    `json:"conn_max_life_time"`
+	ConnMaxIdleTime int    `json:"conn_max_idle_time"`
 	Extra           string `json:"extra"`
 }
 
@@ -80,9 +81,10 @@ func addDBTrace(c *dbconfig) (*sqlx.DB, error) {
 		log.Errorf("mysql open:%s, err:%v", dsn, err)
 		return nil, err
 	}
-	db.SetMaxOpenConns(c.MaxOpenConns)
-	db.SetMaxIdleConns(c.MaxIdleConns)
-	db.SetConnMaxLifetime(time.Duration(c.ConnMaxLifetime) * time.Second)
+	db.SetMaxOpenConns(c.MaxOpenConn)
+	db.SetMaxIdleConns(c.MaxIdleConn)
+	db.SetConnMaxIdleTime(time.Duration(c.ConnMaxLifetime) * time.Second)
+	db.SetConnMaxLifetime(time.Duration(c.ConnMaxIdleTime) * time.Second)
 
 	return db, nil
 }

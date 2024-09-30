@@ -34,7 +34,7 @@ func main() {
 		return
 	}
 	// key为mysql配置模板json对应的key
-	db, err := mysql.GetDB("mudutv")
+	db, err := mysql.GetDB("auth")
 	if err != nil {
 		log.Error(err)
 		return
@@ -47,31 +47,15 @@ func main() {
 		return
 	}
 	log.Infof("redis ping:%v", rds.Ping(context.Background()))
-
-	for {
-		time.Sleep(time.Second)
-		log.Info(apollo.Get("service", "vote_max_count").Int(0)) // apollo 获取对应配置
-	}
 }
 
 func Init() error {
-	// nacos config init
-	if err := nacos.NewOptions(
-		nacos.WithAddress("http://10.10.8.16:8848"),                   // nacos 地址
-		nacos.WithNamespaceID("184b882a-bd12-4498-9377-ae6dda4f4a98"), // nacos namespaceID
-		nacos.WithSeviceName("mdl-nacos-test"),                        // nacos 注册服务名称
-		nacos.WithSevicePort(8080),                                    // nacos 注册服务监听端口号
-		nacos.WithCluster("DEFAULT"),                                  // nacos 集群名称(默认DEFAULT)
-		nacos.WithGroup("mdl"),                                        // nacos 组名称(默认DEFAULT_GROUP)
-	).Store(); err != nil {
-		return err
-	}
 
 	// apollo config init
 	if err := apollo.NewOptions(
-		apollo.WithAddress("http://119.3.102.128:8080"), // apollo 地址
+		apollo.WithAddress("http://127.0.0.1:8080"), // apollo 地址
 		apollo.WithNamespace("application,service"),     // apollo namespace
-		apollo.WithAppID("mudutv-company-srv"),          // apollo appID
+		apollo.WithAppID("auth-srv"),          // apollo appID
 		apollo.WithCluster("dev"),                       // apollo cluster
 		apollo.WithBackUp(true),                         // 是否备份
 	).Store(); err != nil {
@@ -87,7 +71,7 @@ func Init() error {
 
 	// load plugin（version、log、nacos、apollo、mysql、redis）
 	plugins := make([]plugin.Plugin, 0)
-	plugins = append(elf.DefaultPlugins(), nacos.NewPlugin(), apollo.NewPlugin(), store.NewPlugin())
+	plugins = append(elf.DefaultPlugins(), apollo.NewPlugin(), store.NewPlugin())
 	if err := elf.InitPlugins(plugins...); err != nil {
 		return err
 	}
