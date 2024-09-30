@@ -191,7 +191,7 @@ func (o *Options) writeMapToFile(m map[string]*statusData) error {
 	output(w, "}\n")
 
 	// 生成根据code获取Message 函数
-	output(w, "func errMsg(code int) string {")
+	output(w, "func ErrMsg(code int) string {")
 	output(w, "	return errorMsg[code]")
 	output(w, "}")
 	if err = w.Flush(); err != nil {
