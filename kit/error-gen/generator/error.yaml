@@ -1,0 +1,7 @@
+errors:
+  MissingData:
+    code: 100001
+    msg: 数据缺失
+  ParamIllegal:
+    code: 100002
+    msg: 参数传入不合法:[%s]

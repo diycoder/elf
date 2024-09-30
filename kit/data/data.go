@@ -1,0 +1,58 @@
+package data
+
+import (
+	"net/http"
+
+	"github.com/diycoder/elf/kit/errors"
+	"github.com/gin-gonic/gin"
+)
+
+const (
+	defaultError     = "unknown err"
+	defaultMsg       = "ok"
+	defaultErrorCode = 500
+)
+
+type JSONResult struct {
+	Code    int         `json:"code"`
+	Message string      `json:"msg"`
+	Data    interface{} `json:"data"`
+}
+
+type PageResult struct {
+	Total int64       `json:"total"`
+	List  interface{} `json:"list"`
+}
+
+type PageInfo struct {
+	Page int64 `json:"page" form:"page" query:"page"`
+	Size int64 `json:"size" form:"size" query:"size"`
+}
+
+func Error(ctx *gin.Context, err error) {
+	code, detail := http.StatusInternalServerError, defaultError
+	if err != nil {
+		e := errors.Parse((err).Error())
+		if e.Code >= 0 {
+			code = e.Code
+		}
+		detail = e.Detail
+	}
+	ctx.JSON(http.StatusOK, &JSONResult{
+		Code:    code,
+		Message: detail,
+		Data:    "",
+	})
+}
+
+func Success(ctx *gin.Context, data interface{}) {
+	ctx.JSON(http.StatusOK, &JSONResult{
+		Code:    defaultErrorCode,
+		Message: defaultMsg,
+		Data:    data,
+	})
+}
+
+func File(ctx *gin.Context, file, name string) {
+	ctx.FileAttachment(file, name)
+}

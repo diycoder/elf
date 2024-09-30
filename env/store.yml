@@ -1,0 +1,5 @@
+---
+stores:
+  - type: redis # 加载类型: redis (分布式链路追踪)
+    key: redis # 加载的key
+    namespace: application # 读取哪个namespace下的配置

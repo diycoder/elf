@@ -1,0 +1,13 @@
+/.vscode
+/debug
+/main.log
+/access.log
+/vendor
+/main/test/*.go
+/elf
+/log/
+/cache/
+/nacos/
+.idea/
+*.exe
+/main/

@@ -1,0 +1,6 @@
+---
+watch:
+  - group: game # watch group
+    dataId: chapter # watch dataId
+  - group: default # watch group
+    dataId: a # watch dataId

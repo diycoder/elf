@@ -1,0 +1,4 @@
+github.com/go-sql-driver/mysql v1.6.0 h1:BCTh4TKNUYmOmMUcQ3IipzF5prigylS7XXjEkfCHuOE=
+github.com/go-sql-driver/mysql v1.6.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
+github.com/shamaton/msgpack/v2 v2.1.1 h1:gAMxOtVJz93R0EwewwUc8tx30n34aV6BzJuwHE8ogAk=
+github.com/shamaton/msgpack/v2 v2.1.1/go.mod h1:aTUEmh31ziGX1Ml7wMPLVY0f4vT3CRsCvZRoSCs+VGg=
