@@ -47,10 +47,14 @@ func Error(ctx *gin.Context, err error) {
 
 func Success(ctx *gin.Context, data interface{}) {
 	ctx.JSON(http.StatusOK, &JSONResult{
-		Code:    defaultErrorCode,
+		Code:    http.StatusOK,
 		Message: defaultMsg,
 		Data:    data,
 	})
+}
+
+func HTML(ctx *gin.Context, name string, data interface{}) {
+	ctx.HTML(http.StatusOK, name, data)
 }
 
 func File(ctx *gin.Context, file, name string) {
